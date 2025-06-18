@@ -1,8 +1,12 @@
 # ---- build stage ----
-# используем стабильный Go 1.23.6
 FROM golang:1.23.6-alpine AS build
 WORKDIR /app
 COPY . .
+
+# приводим go.mod/go.sum в порядок
+RUN go mod tidy
+
+# теперь компилируем
 RUN go build -o telegram-mcp .
 
 # ---- run stage ----
