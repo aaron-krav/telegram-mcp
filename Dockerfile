@@ -9,5 +9,9 @@ RUN go build -o telegram-mcp .
 FROM alpine:3.20
 WORKDIR /app
 COPY --from=build /app/telegram-mcp .
-ENV MCP_TRANSPORT=sse        # режим обмена с GenSpark
-CMD ["/app/telegram-mcp", "serve", "--port", "${PORT}"]
+
+# включаем SSE-транспорт для GenSpark
+ENV MCP_TRANSPORT=sse   
+
+# запускаем, подставляя порт от Railway
+CMD /app/telegram-mcp serve --port ${PORT:-8080}
