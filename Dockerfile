@@ -10,8 +10,9 @@ FROM alpine:3.20
 WORKDIR /app
 COPY --from=build /app/telegram-mcp .
 
-# включаем SSE-транспорт для GenSpark
-ENV MCP_TRANSPORT=sse   
+# включаем SSE-транспорт
+ENV MCP_TRANSPORT=sse
 
-# запускаем, подставляя порт от Railway
-CMD /app/telegram-mcp serve --port ${PORT:-8080}
+# запускаем, слушая тот порт, который задаёт Railway
+# (Docker-shell подставит значение $PORT)
+CMD /app/telegram-mcp serve --addr 0.0.0.0:${PORT:-8080}
