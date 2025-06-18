@@ -1,6 +1,6 @@
 module github.com/chaindead/telegram-mcp
 
-go 1.24
+go 1.23
 
 require (
 	github.com/gotd/td v0.121.0
