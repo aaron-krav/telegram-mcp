@@ -1,5 +1,6 @@
 # ---- build stage ----
-FROM golang:1.23.6-alpine AS build        # стабильная 1.23.6
+# используем стабильный Go 1.23.6
+FROM golang:1.23.6-alpine AS build
 WORKDIR /app
 COPY . .
 RUN go build -o telegram-mcp .
